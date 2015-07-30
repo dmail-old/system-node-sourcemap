@@ -1,12 +1,12 @@
 {
-	"name": "system-node-sourcemap",
-	"version": "0.0.1",
-	"description": "Polyfill sourcemap on error stack for System on nodejs",
-	"dependencies": {
-		"node-sourcemap": "*"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dmail/system-node-sourcemap"
-	}
+  "name": "system-node-sourcemap",
+  "version": "0.0.2",
+  "description": "Polyfill sourcemap on error stack for System on nodejs",
+  "dependencies": {
+    "node-sourcemap": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmail/system-node-sourcemap"
+  }
 }
