@@ -32,10 +32,10 @@ Error: test
 `node main --sourcemap`
 
 ```
-file:///C:/Users/Damien/Documents/GitHub/es6-project/app/server/server.js:9
-yo;
-   ^ReferenceError: yo is not defined
-        at Object.execute (file:///C:/Users/Damien/Documents/GitHub/es6-project/app/server/server.js:9:4)
+file:///C:/Users/Damien/Documents/GitHub/system-node-sourcemap/test.js:3
+throw new Error('test'); // This is the original code
+                        ^Error: test
+        at Object.execute (file:///C:/Users/Damien/Documents/GitHub/system-node-sourcemap/test.js:3:25)
 ```
 
 ## Fixing `System.sources is undefined, cannot get source for ...`
