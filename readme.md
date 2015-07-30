@@ -1,4 +1,4 @@
-# Sourcemap Polyfill for nodejs transpiled sources
+# Sourcemap Polyfill
 
 This module provides source map on error stack trace of transpiled code.
 
