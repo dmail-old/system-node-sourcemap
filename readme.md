@@ -1,7 +1,6 @@
-# Sourcemap Polyfill for nodejs ES6 modules
+# Sourcemap Polyfill for nodejs transpiled sources
 
-Because systemjs support sourcemap by default this module is useless.
-This module provides source map on error stack trace of ES6 modules.
+This module provides source map on error stack trace of transpiled code.
 
 ## Demo
 
