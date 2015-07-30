@@ -38,9 +38,11 @@ throw new Error('test'); // This is the original code
         at Object.execute (file:///C:/Users/Damien/Documents/GitHub/system-node-sourcemap/test.js:3:25)
 ```
 
-## Fixing `System.sources is undefined, cannot get source for ...`
+## Why demo outputs `System.sources is undefined, cannot get source for ...` ?
 
-Currently you have to modify es6-module-loader to enable source map.
+Currently you have to modify es6-module-loader to enable source map I've opened an issue on es6-module-loader to include this fix in the next version : https://github.com/ModuleLoader/es6-module-loader/issues/419
+
+## Enable sourcemap in es6-module-loader
 
 ####  SystemJS
 
@@ -72,6 +74,4 @@ Replace line #1260 by
 ```javascript
 return self.sources[load.address] = 'var __moduleName = "' + load.name + '";' + transpileFunction.call(self, load, transpiler) + '\n//# sourceURL=' + load.address + '!transpiled';
 ```
-
-I've opened an issue on es6-module-loader to include this fix in the next version : https://github.com/ModuleLoader/es6-module-loader/issues/419
 
