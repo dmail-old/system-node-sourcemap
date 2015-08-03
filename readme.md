@@ -38,7 +38,7 @@ throw new Error('test'); // This is the original code
         at Object.execute (file:///C:/Users/Damien/Documents/GitHub/system-node-sourcemap/test.js:3:25)
 ```
 
-## Fixing `System.sources is undefined, cannot get source for ...`
+## Fixing `System.transpiledSources is undefined, cannot get source for ...`
 
 Currently you have to modify es6-module-loader to enable source map.
 
@@ -48,13 +48,13 @@ In the file `dist/system.src.js`.
 After line #1062 insert
 
 ```javascript
-Loader.prototype.sources = {};
+Loader.prototype.transpiledSources = {};
 ```
 
 Replace line #1083 by
 
 ```javascript
-return self.sources[load.address] = 'var __moduleName = "' + load.name + '";' + transpileFunction.call(self, load, transpiler) + '\n//# sourceURL=' + load.address + '!transpiled';
+return self.transpiledSources[load.address] = 'var __moduleName = "' + load.name + '";' + transpileFunction.call(self, load, transpiler) + '\n//# sourceURL=' + load.address + '!transpiled';
 ```
 
 #### es6-module-loader
@@ -64,14 +64,14 @@ In the file `dist/es6-module-loader-dev.src.js`.
 After line #1240 insert
 
 ```javascript
-Loader.prototype.sources = {};
+Loader.prototype.transpiledSources = {};
 ```
 
 Replace line #1260 by
 
 ```javascript
-return self.sources[load.address] = 'var __moduleName = "' + load.name + '";' + transpileFunction.call(self, load, transpiler) + '\n//# sourceURL=' + load.address + '!transpiled';
+return self.transpiledSources[load.address] = 'var __moduleName = "' + load.name + '";' + transpileFunction.call(self, load, transpiler) + '\n//# sourceURL=' + load.address + '!transpiled';
 ```
 
-I've opened an issue on es6-module-loader to include this fix in the next version : https://github.com/ModuleLoader/es6-module-loader/issues/419
+I've made a pull request https://github.com/ModuleLoader/es6-module-loader/pull/420 on es6-module-loader to include this.
 
