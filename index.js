@@ -3,8 +3,12 @@ var readSource = function(path){
 	if( 'transpiledSources' in System === false ){
 		console.warn('System.transpiledSources is undefined, cannot get source for', path);
 	}
-	else if( path in System.transpiledSources ){
-		return System.transpiledSources[path];
+	else{
+		path = path.replace('!transpiled', '');
+
+		if( path in System.transpiledSources ){
+			return System.transpiledSources[path];
+		}
 	}
 };
 
@@ -17,9 +21,11 @@ System.import = function(){
 };
 
 // promise unhandled rejection hook
+/*
 process.on('unhandledRejection', function(error, promise){
 	if( error ){
 		error = sourceMap.transformError(error, readSource);
 		console.log('unhandled rejection', String(error));
 	}
 });
+*/
