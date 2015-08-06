@@ -74,3 +74,7 @@ Replace line #1260 by
 ```javascript
 return self.transpiledSources[load.address] = 'var __moduleName = "' + load.name + '";' + transpileFunction.call(self, load, transpiler) + '\n//# sourceURL=' + load.address + '!transpiled';
 ```
+
+## Dependencies
+
+- [node-sourcemap](https://github.com/dmail/node-sourcemap)
