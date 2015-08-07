@@ -24,4 +24,6 @@ process.on('uncaughtException', function(error){
 	sourceMap.transformError(error, readSource);
 });
 
-module.exports = sourceMap.transformError.bind(sourceMap);
+module.exports = function(error){
+	return sourceMap.transformError(error, readSource);
+};
