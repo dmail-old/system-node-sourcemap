@@ -20,12 +20,8 @@ System.import = function(){
 	});
 };
 
-// promise unhandled rejection hook
-/*
-process.on('unhandledRejection', function(error, promise){
-	if( error ){
-		error = sourceMap.transformError(error, readSource);
-		console.log('unhandled rejection', String(error));
-	}
+process.on('uncaughtException', function(error){
+	sourceMap.transformError(error, readSource);
 });
-*/
+
+module.exports = sourceMap.transformError.bind(sourceMap);
