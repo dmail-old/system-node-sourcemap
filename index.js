@@ -1,17 +1,35 @@
+/* global System */
+
+if( typeof System === 'undefined' ){
+	throw new Error('System is undefined, you must require es6-module-loader or Systemjs before this one');
+}
+
 var sourceMap = require('node-sourcemap');
+
 var readSource = function(path){
-	if( 'transpiledSources' in System === false ){
-		console.warn('System.transpiledSources is undefined, cannot get source for', path);
+
+	if( 'loads' in System === false ){
+		console.warn('System.loads is undefined, you must set System.trace = true');
 	}
 	else{
 		path = path.replace('!transpiled', '');
+		path = System.normalize(path);
 
-		if( path in System.transpiledSources ){
-			return System.transpiledSources[path];
+		if( false === path in System.loads ){
+			// console.warn('no source for', path);
+		}
+		else{
+			if( false === 'source' in System.loads[path] ){
+				throw new Error('source undefined for ' + path);
+			}			
+			else{
+				return System.loads[path].source;
+			}
 		}
 	}
 };
 
+System.trace = true;
 var importMethod = System.import;
 System.import = function(){
 	return importMethod.apply(this, arguments).catch(function(error){
