@@ -19,11 +19,11 @@ var readSource = function(path){
 			// console.warn('no source for', path);
 		}
 		else{
-			if( false === 'source' in System.loads[path] ){
-				throw new Error('source undefined for ' + path);
+			if( false === 'transpiledSource' in System.loads[path] ){
+				throw new Error('transpiledSource undefined for ' + path);
 			}			
 			else{
-				return System.loads[path].source;
+				return System.loads[path].transpiledSource;
 			}
 		}
 	}
