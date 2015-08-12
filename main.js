@@ -1,6 +1,6 @@
 /* global System */
 
-global.System = require('es6-module-loader').System;
+global.System = require('systemjs');
 System.transpiler = 'babel';
 System.paths.babel = './node_modules/babel-core/browser.js';
 if( process.argv[2] === '--sourcemap' ) require('./index');
