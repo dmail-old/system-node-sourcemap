@@ -15,6 +15,8 @@ main.js:
 
 ```javascript
 require('systemjs');
+System.transpiler = 'babel';
+System.paths.babel = './node_modules/babel-core/browser.js';
 if( process.argv[2] === '--sourcemap' ) require('system-node-sourcemap');
 
 System.import('./test.js').catch(function(error){
@@ -26,7 +28,6 @@ System.import('./test.js').catch(function(error){
 
 ```
 Error: test
-    at execute (system-node-sourcemap/test.js!transpiled:9:13)
 ```
 
 `node main --sourcemap`
@@ -34,8 +35,9 @@ Error: test
 ```
 system-node-sourcemap/test.js:3
 throw new Error('test'); // This is the original code
-                        ^Error: test
-        at Object.execute (system-node-sourcemap/test.js:3:25)
+      ^Error: test
+        at execute (system-node-sourcemap/test.js:3:7)
+        at ensureEvaluated (system-node-sourcemap\node_modules\systemjs\dist\system.src.js:2108:26)
 ```
 
 ## Dependencies
