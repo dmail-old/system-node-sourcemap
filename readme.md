@@ -2,35 +2,24 @@
 
 This module provides source map on error stack trace of SystemJS transpiled code.
 
-## Demo
+## Example
 
-test.js:
+To run the example you need to install systemjs & babel-core : `npm i systemjs babel-core`.  
+Now we can throw error of a transpiled file, you can check [main.js](./main.js) to see how the file is executed.
 
-```
+```javascript
 "format es6";
+
 throw new Error('test'); // This is the original code
 ```
 
-main.js:
-
-```javascript
-require('systemjs');
-System.transpiler = 'babel';
-System.paths.babel = './node_modules/babel-core/browser.js';
-if( process.argv[2] === '--sourcemap' ) require('system-node-sourcemap');
-
-System.import('./test.js').catch(function(error){
-	console.log(String(error));
-});
-```
-
-`node main`
+Run without sourcemap : `node main`
 
 ```
 Error: test
 ```
 
-`node main --sourcemap`
+Run with sourcemap : `node main --sourcemap`
 
 ```
 system-node-sourcemap/test.js:3
