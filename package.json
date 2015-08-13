@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "Polyfill sourcemap on error stack for System on nodejs",
   "dependencies": {
-    "node-sourcemap": "*"
+    "node-sourcemap": "https://github.com/dmail/node-sourcemap"
   },
   "repository": {
     "type": "git",
