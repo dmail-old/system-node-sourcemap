@@ -1,6 +1,6 @@
 {
   "name": "system-node-sourcemap",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Polyfill sourcemap on error stack for System on nodejs",
   "dependencies": {
     "node-sourcemap": "https://github.com/dmail/node-sourcemap"
