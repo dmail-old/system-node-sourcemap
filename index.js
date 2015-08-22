@@ -5,27 +5,26 @@ if( typeof System === 'undefined' ){
 }
 
 var sourceMap = require('node-sourcemap');
-var sources = {};
 
-var readSource = function(path){
+function readSource(path){
 	path = path.replace('!transpiled', '');
 	//path = System.normalize(path);
 
-	if( false === path in sources ){
+	if( false === path in System.sources ){
 		//throw new Error('source undefined for ' + path);
 	}			
 	else{
-		return sources[path];
+		return System.sources[path];
 	}
-};
+}
 
-if( !System.nodeSourceMap ){
-	System.nodeSourceMap = true;	
+if( !System.sources ){
+	System.sources = {};
 
 	var translateMethod = System.translate;
 	System.translate = function(load){
 		return translateMethod.call(this, load).then(function(source){
-			sources[load.address] = source;
+			System.sources[load.address] = source;
 			return source;
 		});
 	};
