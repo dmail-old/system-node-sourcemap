@@ -19,26 +19,30 @@ var readSource = function(path){
 	}
 };
 
-var translateMethod = System.translate;
-System.translate = function(load){
-	return translateMethod.call(this, load).then(function(source){
-		sources[load.address] = source;
-		return source;
-	});
-};
+if( !System.nodeSourceMap ){
+	System.nodeSourceMap = true;	
 
-System.trace = true;
-var importMethod = System.import;
-System.import = function(){
-	return importMethod.apply(this, arguments).catch(function(error){
-		error = sourceMap.transformError(error, readSource);
-		return Promise.reject(error);
-	});
-};
+	var translateMethod = System.translate;
+	System.translate = function(load){
+		return translateMethod.call(this, load).then(function(source){
+			sources[load.address] = source;
+			return source;
+		});
+	};
 
-process.on('uncaughtException', function(error){
-	sourceMap.transformError(error, readSource);
-});
+	System.trace = true;
+	var importMethod = System.import;
+	System.import = function(){
+		return importMethod.apply(this, arguments).catch(function(error){
+			error = sourceMap.transformError(error, readSource);
+			return Promise.reject(error);
+		});
+	};
+
+	process.on('uncaughtException', function(error){
+		sourceMap.transformError(error, readSource);
+	});
+}
 
 module.exports = function(error){
 	return sourceMap.transformError(error, readSource);
