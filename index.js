@@ -39,6 +39,7 @@ if( !System.sources ){
 	};
 
 	process.on('uncaughtException', function(error){
+		console.log('uncaught');
 		sourceMap.transformError(error, readSource);
 	});
 }
