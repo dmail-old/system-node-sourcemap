@@ -12,7 +12,7 @@ function readSource(path){
 
 	if( false === path in System.sources ){
 		//throw new Error('source undefined for ' + path);
-	}			
+	}
 	else{
 		return System.sources[path];
 	}
@@ -39,8 +39,8 @@ if( !System.sources ){
 	};
 
 	process.on('uncaughtException', function(error){
-		console.log('uncaught');
 		sourceMap.transformError(error, readSource);
+		throw error;
 	});
 }
 
