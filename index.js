@@ -38,7 +38,7 @@ if( !System.sources ){
 		});
 	};
 
-	process.on('uncaughtException', function(error){
+	process.on('uncaughtException', function handleUncaughtException(error){
 		sourceMap.transformError(error, readSource);
 		throw error;
 	});
