@@ -38,6 +38,15 @@ if( !System.sources ){
 		});
 	};
 
+	// error are sourcemapped before being logged
+	Object.defineProperty(Error.prototype, 'inspect', {
+		enumerable: false,
+		configurable: true,
+		value: function(){
+			return sourceMap.transformError(this, readSource).toString();
+		}
+	});
+
 	process.on('uncaughtException', function handleUncaughtException(error){
 		sourceMap.transformError(error, readSource);
 		throw error;
