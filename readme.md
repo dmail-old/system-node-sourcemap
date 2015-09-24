@@ -1,25 +1,37 @@
 # Sourcemap Polyfill
 
-This module provides source map on error stack trace of SystemJS transpiled code.
+Add source map support on error stack trace of SystemJS transpiled code.
 
 ## Example
 
-To run the example you need to install systemjs & babel-core : `npm i systemjs babel-core`.  
-Now we can throw error of a transpiled file, you can check [main.js](./main.js) to see how the file is executed.
+We are going to execute the file at [test/modules/error.js](./test/modules/error.js) using this code 
 
 ```javascript
-"format es6";
+require('systemjs');
+System.transpiler = 'babel';
 
-throw new Error('test'); // This is the original code
+System.import('./test/modules/error.js').catch(function(error){
+	console.log(String(error));
+});
 ```
 
-Run without sourcemap : `node main`
+Running the above outputs
 
 ```
 Error: test
 ```
 
-Run with sourcemap : `node main --sourcemap`
+```javascript
+require('systemjs');
+System.transpiler = 'babel';
+require('system-node-sourcemap');
+
+System.import('./test/modules/error.js').catch(function(error){
+	console.log(String(error));
+});
+```
+
+Running the above now outputs : 
 
 ```
 system-node-sourcemap/test.js:3
