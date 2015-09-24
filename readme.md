@@ -2,16 +2,18 @@
 
 Add source map support on error stack trace of SystemJS transpiled code.
 
-## Without this module
+## Example
+
+#### Executing es6 code without this module
 
 ```javascript
 require('systemjs');
 System.import('./test/modules/error.js').catch(function(error){
-      console.log(error.stack);
+      console.error(error.stack);
 });
 ```
 
-Console output
+Write the following in the console
 
 ```
 
@@ -21,7 +23,7 @@ Error: test
     
 ```
 
-#### With this module
+## Executing es6 code with this module
 
 ```javascript
 require('systemjs');
@@ -30,7 +32,7 @@ require('system-node-sourcemap');
 System.import('./test/modules/error.js').catch(console.error);
 ```
 
-Console output
+Write a more interesting error in the console
 
 ```
 
