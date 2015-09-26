@@ -21,11 +21,33 @@ function readSource(path){
 if( !System.sources ){
 	System.sources = {};
 
+	function improveSyntaxError(error){
+		if( error && error.name === 'SyntaxError' && error._babel ){
+			// error.loc contains {line: 0, column: 0}
+			var match = error.message.match(/([\s\S]+): Unterminated string constant \(([0-9]+)\:([0-9]+)/);
+
+			if( match ){
+				var improvedError = new SyntaxError();
+				var column = match[3];
+				column+= 62; // because node-sourcemap/index.js:155 will do column-=62
+
+				improvedError.stack = 'SyntaxError: Unterminated string constant\n\t at ' + match[1] + ':' + match[2] + ':' + column;
+
+				return improvedError;
+			}
+		}
+
+		return error;
+	}
+
 	var translateMethod = System.translate;
 	System.translate = function(load){
 		return translateMethod.call(this, load).then(function(source){
 			System.sources[load.address] = source;
 			return source;
+		}).catch(function(error){
+			error = improveSyntaxError(error);
+			return Promise.reject(error);
 		});
 	};
 
