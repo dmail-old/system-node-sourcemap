@@ -21,7 +21,7 @@ function readSource(path){
 if( !System.sources ){
 	System.sources = {};
 
-	function improveSyntaxError(error){
+	var improveSyntaxError = function(error){
 		if( error && error.name === 'SyntaxError' && error._babel ){
 			// error.loc contains {line: 0, column: 0}
 			var match = error.message.match(/([\s\S]+): Unterminated string constant \(([0-9]+)\:([0-9]+)/);
@@ -38,7 +38,7 @@ if( !System.sources ){
 		}
 
 		return error;
-	}
+	};
 
 	var translateMethod = System.translate;
 	System.translate = function(load){
