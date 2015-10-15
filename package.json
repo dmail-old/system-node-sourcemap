@@ -2,6 +2,7 @@
   "name": "system-node-sourcemap",
   "version": "0.0.8",
   "description": "Polyfill sourcemap on error stack for System on nodejs",
+  "license": "UNLICENSED",
   "dependencies": {
     "babel": "*",
     "babel-core": "*",
