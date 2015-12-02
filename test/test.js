@@ -2,9 +2,18 @@
 
 require('systemjs');
 System.transpiler = 'babel';
-require('../index.js');
-require('../index.js'); // require twice just to check error is not logged twice
+require('../index.js').install();
 
-System.import('./test/modules/error.js').catch(function(error){
-	console.log(String(error));
-});
+var assert = require('assert');
+
+System.import('./test/modules/error.js').then(
+	function(value){
+		console.log('import resolved with', value);
+	},
+	function(error){
+		var stack = error.stack;
+		assert.equal(error.lineNumber, 3);
+
+		console.log('tests passed');
+	}
+);

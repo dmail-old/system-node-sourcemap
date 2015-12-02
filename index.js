@@ -52,6 +52,21 @@ if( !System.sources ){
 	};
 
 	System.trace = true;
+
+	// error are sourcemapped before being logged
+	/*
+	Object.defineProperty(Error.prototype, 'inspect', {
+		enumerable: false,
+		configurable: true,
+		value: function(){
+			return sourceMap.transformError(this, readSource).toString();
+		}
+	});
+	*/
+
+	/*
+	// not needed anymore thanks to Error.prepareStackTrace
+
 	var importMethod = System.import;
 	System.import = function(){
 		return importMethod.apply(this, arguments).catch(function(error){
@@ -60,21 +75,15 @@ if( !System.sources ){
 		});
 	};
 
-	// error are sourcemapped before being logged
-	Object.defineProperty(Error.prototype, 'inspect', {
-		enumerable: false,
-		configurable: true,
-		value: function(){
-			return sourceMap.transformError(this, readSource).toString();
-		}
-	});
-
 	process.on('uncaughtException', function handleUncaughtException(error){
 		sourceMap.transformError(error, readSource);
 		throw error;
 	});
+	*/
 }
 
-module.exports = function(error){
-	return sourceMap.transformError(error, readSource);
+module.exports = {
+	install: function(){
+		sourceMap.install(readSource);
+	}
 };
