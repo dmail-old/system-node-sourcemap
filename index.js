@@ -29,7 +29,7 @@ if( !System.sources ){
 			if( match ){
 				var improvedError = new SyntaxError();
 				var column = match[3];
-				column+= 62; // because node-sourcemap/index.js:155 will do column-=62
+				column+= 63; // because node-sourcemap/index.js:155 will do column-=63
 
 				improvedError.stack = 'SyntaxError: Unterminated string constant\n\t at ' + match[1] + ':' + match[2] + ':' + column;
 
@@ -83,6 +83,8 @@ if( !System.sources ){
 }
 
 module.exports = {
+	StackTrace: sourceMap.StackTrace,
+
 	install: function(){
 		sourceMap.install(readSource);
 	}
