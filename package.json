@@ -7,7 +7,7 @@
     "babel": "*",
     "babel-core": "*",
     "systemjs": "*",
-    "node-sourcemap": "git+https://github.com/dmail/node-sourcemap"
+    "node-sourcemap": "git+https://github.com/dmail-old/node-sourcemap"
   },
   "scripts": {
     "test": "node test/test.js"
