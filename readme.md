@@ -20,16 +20,16 @@ Write the following in the console
 Error: test
     at execute (system-node-sourcemap/test/modules/error.js!transpiled:9:13)
     at ensureEvaluated (system-node-sourcemap/node_modules/systemjs/dist/system.src.js:2007:26)
-    
+
 ```
 
 ## Executing es6 code with this module
 
 ```javascript
 require('systemjs');
-require('system-node-sourcemap');
-
-System.import('./test/modules/error.js').catch(console.error);
+require('system-node-sourcemap')().then(function() {
+	return System.import('./test/modules/error.js');
+}).catch(console.error);
 ```
 
 Write a more interesting error in the console
