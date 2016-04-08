@@ -188,7 +188,6 @@ module.exports = function install() {
         // eslint-disable-next-line
         return System.import('file:///' + __dirname + '/node_modules/@dmail/node-stacktrace/index.js');
     }).then(function(module) {
-        Error.prepareStackTrace = undefined; // prevent auto stack trace creation
         return module.default;
     }).then(function(StackTrace) {
         var SourceMapConsumer = require('source-map').SourceMapConsumer;
@@ -257,6 +256,7 @@ module.exports = function install() {
             }
         }
 
+        StackTrace.ondemand(); // prevent auto stack trace creation
         StackTrace.setTransformer(transformCallSite);
 
         return StackTrace;
