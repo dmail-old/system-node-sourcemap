@@ -4,11 +4,13 @@
   "description": "Polyfill sourcemap on error stack for System on nodejs",
   "license": "UNLICENSED",
   "dependencies": {
-    "babel": "*",
-    "babel-core": "^5.8.22",
-    "systemjs": "*",
     "source-map": "0.4.4",
     "@dmail/node-stacktrace": "git+https://github.com/dmail/node-stacktrace"
+  },
+  "devDependencies": {
+    "babel": "*",
+    "babel-core": "^5.8.22",
+    "systemjs": "*"
   },
   "scripts": {
     "test": "node test/test.js"
